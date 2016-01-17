@@ -37,7 +37,8 @@ return declare( FeatureGlyph, {
         var r = this.getRadius( fRect.f, fRect.viewInfo.block );
         if( r.r == 0 ) return;
         context.beginPath();
-        context.strokeStyle = this.get_hue_color( Math.abs( r.score ) );
+        context.strokeStyle = this.get_hue_color( 10 * Math.log( r.score + 1 ) );
+        context.lineWidth = 2* Math.log( r.score + 1 );
         context.arc( r.drawTo + r.r, 0, Math.abs( r.r ), 0, Math.PI );
         context.stroke();
     },

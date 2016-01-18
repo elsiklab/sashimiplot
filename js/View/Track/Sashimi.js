@@ -50,6 +50,20 @@ return declare( CanvasFeatures,
             }
         });
         return options;
-    }
+    },
+    // override getLayout to access addRect method
+    _getLayout: function () {
+        var thisB = this;
+        var browser = this.browser;
+        var layout = this.inherited(arguments);
+        var clabel = this.name + "-collapsed";
+        return declare.safeMixin(layout, {
+            addRect: function (id, left, right, height, data) {
+                this.pTotalHeight = 10*Math.log(data.get('end') - data.get('start'))
+                return 0;
+                
+            }
+        });
+    },
 });
 });

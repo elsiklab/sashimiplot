@@ -18,14 +18,23 @@ return declare( FeatureGlyph, {
             {
                 //maxFeatureScreenDensity: 400
                 style: {
-                    color: function( feature, path, glyph, track ) {
-                        return 'rgba(0,0,0,0)';
+                    color: function( feature ) {
+                        if( this.config.useXS ) {
+                            return feature.get('strand') == 1 ?
+                                'hsl(' + 30 + ',50%,'+15 * Math.log( feature.get('score') + 1 ) +'%)' :
+                                'hsl(' + 200 + ',50%,'+15 * Math.log( feature.get('score') + 1 ) +'%)';
+                        }
+                        else {
+                            return 'hsl(' + 20 * Math.log( feature.get('score') + 1 ) + ',50%,50%)';
+                        }
+                    },
+                    height: function( feature ) {
+                        return 10*Math.log( feature.get('end') - feature.get('start') )
                     },
                     border_color: null,
                     mouseovercolor: 'rgba(0,0,0,0)',
                     readDepthFilter: 0,
                     strandArrow: false,
-                    height: 7,
                     marginBottom: 1,
                     showMismatches: true,
                     mismatchFont: 'bold 10px Courier New,monospace'
@@ -36,14 +45,14 @@ return declare( FeatureGlyph, {
 
     renderFeature: function( context, fRect ) {
         var r = this.getRadius( fRect.f, fRect.viewInfo.block );
-        if( r.r == 0 ) return;
+        if( r.r == 0 || r.score < (this.config.readDepthFilter||0) ) return;
         context.beginPath();
-        context.strokeStyle = this.get_hue_color( 20 * Math.log( r.score + 1 ) );
+        var style = lang.hitch( this, 'getStyle' );
+        context.strokeStyle = style( fRect.f, 'color' );
         context.lineWidth = 2* Math.log( r.score + 1 );
         context.moveTo( r.drawFrom, 0 );
-        if( this.config.readDepthFilter && r.score < this.config.readDepthFilter ) return;
-        var ret = fRect.f.get('end') - fRect.f.get('start');
-        context.bezierCurveTo( r.drawFrom, 10*Math.log(ret), r.drawTo, 10*Math.log(ret), r.drawTo, 0 );
+        var height = style( fRect.f, 'height' );
+        context.bezierCurveTo( r.drawFrom, height, r.drawTo, height, r.drawTo, 0 );
         context.stroke();
     },
     getRadius: function( feature, block ) {
@@ -58,7 +67,7 @@ return declare( FeatureGlyph, {
             score: feature.get('score'),
         };
     },
-    get_hue_color: function(x) {
+    get_hue_color: function( x ) {
         var h = x;
         var s = 50;
         var l = 50;

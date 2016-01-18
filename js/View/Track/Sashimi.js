@@ -31,6 +31,8 @@ return declare( CanvasFeatures,
 
         var config = lang.clone( this.inherited(arguments) );
         config.glyph = "SashimiPlot/View/FeatureGlyph/SashimiArc";
+        config.useXSOption = true;
+        config.useXS = false;
         return config;
     },
         
@@ -45,10 +47,22 @@ return declare( CanvasFeatures,
                         track.config.readDepthFilter = filterInt;
                         track.browser.publish('/jbrowse/v1/c/tracks/replace', [track.config]);
                     },
-                    readDepthFilter: track.config.readDepthFilter
+                    readDepthFilter: track.config.readDepthFilter||0
                 }).show();                    
             }
         });
+        if(this.config.useXSOption) {
+            options.push({
+                label: 'Use XS',
+                type: 'dijit/CheckedMenuItem',
+                checked: this.config.useXS,
+                onClick: function(event) {
+                    track.config.useXS = this.get('checked');
+                    track.browser.publish('/jbrowse/v1/v/tracks/replace', [track.config]);
+                }
+            });
+        }
+        
         return options;
     },
     // override getLayout to access addRect method
@@ -59,9 +73,11 @@ return declare( CanvasFeatures,
         var clabel = this.name + "-collapsed";
         return declare.safeMixin(layout, {
             addRect: function (id, left, right, height, data) {
-                this.pTotalHeight = Math.min( 10*Math.log(data.get('end') - data.get('start')), this.maxHeight );
+                this.pTotalHeight = Math.min( 
+                    Math.max(10*Math.log(data.get('end') - data.get('start')), this.pTotalHeight ),
+                    this.maxHeight 
+                );
                 return 0;
-                
             }
         });
     },

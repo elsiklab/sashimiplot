@@ -71,6 +71,7 @@ return declare( [ SeqFeatureStore, MismatchesMixin ], {
                                 feature: feature,
                                 start: feature.get('start')+mismatch.start,
                                 end: feature.get('start')+mismatch.start+mismatch.length,
+                                strand: feature.get('XS'),
                                 count: 1
                             };
                         }
@@ -87,7 +88,8 @@ return declare( [ SeqFeatureStore, MismatchesMixin ], {
                                                         data: {
                                                             start: skip.start,
                                                             end: skip.end,
-                                                            score: skip.count
+                                                            score: skip.count,
+                                                            strand: {"+":1,"-":-1}[skip.strand]||0
                                                         }
                                                     })
                     );

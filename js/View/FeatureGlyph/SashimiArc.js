@@ -23,6 +23,7 @@ return declare( FeatureGlyph, {
                     },
                     border_color: null,
                     mouseovercolor: 'rgba(0,0,0,0)',
+                    readDepthFilter: 0,
                     strandArrow: false,
                     height: 7,
                     marginBottom: 1,
@@ -37,9 +38,12 @@ return declare( FeatureGlyph, {
         var r = this.getRadius( fRect.f, fRect.viewInfo.block );
         if( r.r == 0 ) return;
         context.beginPath();
-        context.strokeStyle = this.get_hue_color( 10 * Math.log( r.score + 1 ) );
+        context.strokeStyle = this.get_hue_color( 20 * Math.log( r.score + 1 ) );
         context.lineWidth = 2* Math.log( r.score + 1 );
-        context.arc( r.drawTo + r.r, 0, Math.abs( r.r ), 0, Math.PI );
+        context.moveTo( r.drawFrom, 0 );
+        if( this.config.readDepthFilter && r.score < this.config.readDepthFilter ) return;
+        var ret = fRect.f.get('end') - fRect.f.get('start');
+        context.bezierCurveTo( r.drawFrom, 10*Math.log(ret), r.drawTo, 10*Math.log(ret), r.drawTo, 0 );
         context.stroke();
     },
     getRadius: function( feature, block ) {
@@ -50,6 +54,7 @@ return declare( FeatureGlyph, {
         return {
             r: ( drawFrom - drawTo ) / 2,
             drawTo: drawTo,
+            drawFrom: drawFrom,
             score: feature.get('score'),
         };
     },

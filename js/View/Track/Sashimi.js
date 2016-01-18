@@ -3,6 +3,7 @@ define( [
             'dojo/_base/array',
             'dojo/_base/lang',
             'SashimiPlot/Store/SeqFeature/Sashimi',
+            'SashimiPlot/View/Dialog/ReadDepthDialog',
             'JBrowse/View/Track/CanvasFeatures'
         ],
         function(
@@ -10,6 +11,7 @@ define( [
             array,
             lang,
             SashimiStore,
+            ReadDepthDialog,
             CanvasFeatures
         ) {
 
@@ -26,9 +28,28 @@ return declare( CanvasFeatures,
             });
     },
     _defaultConfig: function() {
+
         var config = lang.clone( this.inherited(arguments) );
         config.glyph = "SashimiPlot/View/FeatureGlyph/SashimiArc";
         return config;
+    },
+        
+    _trackMenuOptions: function() {
+        var track = this;
+        var options = this.inherited(arguments);
+        options.push({
+            label: 'Filter depth',
+            onClick: function(event) {
+                new ReadDepthDialog({
+                    setCallback: function( filterInt ) {
+                        track.config.readDepthFilter = filterInt;
+                        track.browser.publish('/jbrowse/v1/c/tracks/replace', [track.config]);
+                    },
+                    readDepthFilter: track.config.readDepthFilter
+                }).show();                    
+            }
+        });
+        return options;
     }
 });
 });

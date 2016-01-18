@@ -60,7 +60,7 @@ return declare( ActionBarDialog, {
 
         this.readDepthSpinner = new NumberSpinner({
             value: this.readDepthFilter,
-            smallDelta: 10
+            smallDelta: 2
         });
 
         this.set('content', [

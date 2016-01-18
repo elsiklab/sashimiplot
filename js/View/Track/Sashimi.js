@@ -59,7 +59,7 @@ return declare( CanvasFeatures,
         var clabel = this.name + "-collapsed";
         return declare.safeMixin(layout, {
             addRect: function (id, left, right, height, data) {
-                this.pTotalHeight = 10*Math.log(data.get('end') - data.get('start'))
+                this.pTotalHeight = Math.min( 10*Math.log(data.get('end') - data.get('start')), this.maxHeight );
                 return 0;
                 
             }

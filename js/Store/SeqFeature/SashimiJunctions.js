@@ -3,19 +3,19 @@ define([
            'dojo/_base/array',
            'JBrowse/Util',
            'JBrowse/Store/SeqFeature',
-           'JBrowse/Model/SimpleFeature',
-           'JBrowse/Store/SeqFeature/_MismatchesMixin'
+           'JBrowse/Model/SimpleFeature'
        ],
        function(
            declare,
            array,
            Util,
            SeqFeatureStore,
-           SimpleFeature,
-           MismatchesMixin
+           SimpleFeature
        ) {
+
 var dojof = Util.dojof;
-return declare( [ SeqFeatureStore, MismatchesMixin ], {
+
+return declare( [ SeqFeatureStore ], {
 
     constructor: function( args ) {
         this.store = args.store;
@@ -34,23 +34,20 @@ return declare( [ SeqFeatureStore, MismatchesMixin ], {
             function( feature ) {
                 if( ! thisB.filter( feature ) )
                     return;
-                array.forEach( thisB._getMismatches( feature ), function( mismatch ) {
-                    var s=feature.get('start')+mismatch.start;
-                    var e=feature.get('start')+mismatch.start+mismatch.length;
-                    var hash=s*s+e*e;
-                    if( mismatch.type=="skip" ) {
-                        if( !skipmap[ hash ] ) {
-                            skipmap[ hash ] = {
-                                feature: feature,
-                                start: s,
-                                end: e,
-                                strand: feature.get('XS'),
-                                count: 1
-                            };
-                        }
-                        else skipmap[ hash ].count++;
-                    }
-                })
+                var s = feature.get('start');
+                var e = feature.get('end');
+                var strand = feature.get('strand');
+                var hash = s*s+e*e;
+                if( !skipmap[ hash ] ) {
+                    skipmap[ hash ] = {
+                        feature: feature,
+                        start: s,
+                        end: e,
+                        strand: strand,
+                        count: 1
+                    };
+                }
+                else skipmap[ hash ].count++;
             },
             function ( args ) {
                 // make fake features from the coverage
@@ -62,13 +59,13 @@ return declare( [ SeqFeatureStore, MismatchesMixin ], {
                                                             start: skip.start,
                                                             end: skip.end,
                                                             score: skip.count,
-                                                            strand: {"+":1,"-":-1}[skip.strand]||0
+                                                            strand: skip.strand
                                                         }
                                                     })
                     );
                 });
                 
-                finishCallback( args ); // optional arguments may change callback behaviour (e.g. add masking)
+                finishCallback( args );
             }
             , errorCallback
         );
@@ -76,8 +73,7 @@ return declare( [ SeqFeatureStore, MismatchesMixin ], {
 
     saveStore: function() {
         return {
-            urlTemplate: this.config.bam.url,
-            baiUrlTemplate: this.config.bai.url
+            urlTemplate: this.config.bam.url
         };
     }
 });

@@ -14,3 +14,7 @@ A JBrowse implementation of the sashimi plot style tool. Features a storeclass t
 * style->height - integer height or callback function returning height of the bezier curves 
 * useXS - a built-in option to change color according to the XS tag (which indicates strand, inferred from canonical splice sites)
 
+
+![](img/out.png)
+
+

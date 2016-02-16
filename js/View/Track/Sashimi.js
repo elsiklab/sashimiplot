@@ -80,6 +80,6 @@ return declare( CanvasFeatures,
                 return 0;
             }
         });
-    },
+    }
 });
 });

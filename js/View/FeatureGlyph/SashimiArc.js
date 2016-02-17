@@ -21,8 +21,8 @@ return declare( FeatureGlyph, {
                     color: function( feature ) {
                         if( this.config.useXS ) {
                             return feature.get('strand') == 1 ?
-                                'hsl(' + 30 + ',50%,'+15 * Math.log( feature.get('score') + 1 ) +'%)' :
-                                'hsl(' + 200 + ',50%,'+15 * Math.log( feature.get('score') + 1 ) +'%)';
+                                'hsl(' + 30 + ',50%,'+10 * Math.log( feature.get('score') + 1 ) +'%)' :
+                                'hsl(' + 200 + ',50%,'+Math.max(10 * Math.log( feature.get('score') + 1 ),70) +'%)';
                         }
                         else {
                             return 'hsl(' + 20 * Math.log( feature.get('score') + 1 ) + ',50%,50%)';

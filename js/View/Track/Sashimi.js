@@ -33,6 +33,7 @@ return declare( CanvasFeatures,
         config.glyph = "SashimiPlot/View/FeatureGlyph/SashimiArc";
         config.useXSOption = true;
         config.useXS = false;
+        config.maxHeight = 100;
         return config;
     },
         

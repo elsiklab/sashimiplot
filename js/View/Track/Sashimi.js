@@ -4,7 +4,8 @@ define( [
             'dojo/_base/lang',
             'SashimiPlot/Store/SeqFeature/Sashimi',
             'SashimiPlot/View/Dialog/ReadDepthDialog',
-            'JBrowse/View/Track/CanvasFeatures'
+            'JBrowse/View/Track/CanvasFeatures',
+            'JBrowse/Util'
         ],
         function(
             declare,
@@ -12,7 +13,8 @@ define( [
             lang,
             SashimiStore,
             ReadDepthDialog,
-            CanvasFeatures
+            CanvasFeatures,
+            Util
         ) {
 
 return declare( CanvasFeatures,
@@ -28,13 +30,14 @@ return declare( CanvasFeatures,
             });
     },
     _defaultConfig: function() {
-
-        var config = lang.clone( this.inherited(arguments) );
-        config.glyph = "SashimiPlot/View/FeatureGlyph/SashimiArc";
-        config.useXSOption = true;
-        config.useXS = false;
-        config.maxHeight = 100;
-        return config;
+        return Util.deepUpdate(
+            lang.clone( this.inherited(arguments) ),
+            {
+                glyph: "SashimiPlot/View/FeatureGlyph/SashimiArc",
+                useXSOption: true,
+                useXS: false,
+                maxHeight: 100
+            });
     },
         
     _trackMenuOptions: function() {

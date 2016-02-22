@@ -44,7 +44,7 @@ return declare( [ SeqFeatureStore, MismatchesMixin ], {
                                 feature: feature,
                                 start: s,
                                 end: e,
-                                strand: feature.get('XS'),
+                                strand: feature.get('xs'),
                                 count: 1
                             };
                         }

@@ -23,6 +23,8 @@ Other options on the BAM store tracks can apply, such as chunkSizeLimit
 
 ## Example track config
 
+Calculating straight from BAM file
+
       {
           "label": "Nurse_junctions",
           "storeClass": "JBrowse/Store/SeqFeature/BAM",
@@ -31,3 +33,14 @@ Other options on the BAM store tracks can apply, such as chunkSizeLimit
           "chunkSizeLimit": 50000000,
           "useXS": true
       }
+
+Using a file like junctions.bed loaded with flatfile-to-json.pl
+
+
+      {
+         "storeClass" : "JBrowse/Store/SeqFeature/NCList",
+         "urlTemplate" : "tracks/test/{refseq}/trackData.json",
+         "type" : "SashimiPlot/View/Track/Sashimi",
+         "label" : "From_junctions_bed"
+      }
+

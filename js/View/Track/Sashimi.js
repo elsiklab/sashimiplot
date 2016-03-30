@@ -5,6 +5,7 @@ define( [
             'SashimiPlot/Store/SeqFeature/Sashimi',
             'SashimiPlot/View/Dialog/ReadDepthDialog',
             'JBrowse/View/Track/CanvasFeatures',
+            'JBrowse/Store/SeqFeature/BAM',
             'JBrowse/Util'
         ],
         function(
@@ -14,6 +15,7 @@ define( [
             SashimiStore,
             ReadDepthDialog,
             CanvasFeatures,
+            BAM,
             Util
         ) {
 
@@ -21,13 +23,15 @@ return declare( CanvasFeatures,
 {
     constructor: function() {
         var thisB = this;
-        this.store = new SashimiStore(
-            { store: this.store,
-              browser: this.browser,
-              filter: function( f ) {
-                  return thisB.filterFeature( f );
-              }
+        if(this.store.isInstanceOf(BAM)) {
+            this.store = new SashimiStore({
+                store: this.store,
+                browser: this.browser,
+                filter: function( f ) {
+                    return thisB.filterFeature( f );
+                }
             });
+        }
     },
     _defaultConfig: function() {
         return Util.deepUpdate(

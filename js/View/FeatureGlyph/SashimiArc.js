@@ -31,6 +31,9 @@ return declare( FeatureGlyph, {
                     height: function( feature ) {
                         return 10*Math.log( feature.get('end') - feature.get('start') )
                     },
+                    lineWidth: function( feature ) {
+                        return Math.log( feature.get('score') + 1 );
+                    },
                     border_color: null,
                     mouseovercolor: 'rgba(0,0,0,0)',
                     readDepthFilter: 0,
@@ -44,34 +47,36 @@ return declare( FeatureGlyph, {
     },
 
     renderFeature: function( context, fRect ) {
+        var style = lang.hitch( this, 'getStyle' );
+
         var r = this.getRadius( fRect.f, fRect.viewInfo.block );
         if( r.r == 0 || r.score < (this.config.readDepthFilter||0) ) return;
         context.beginPath();
-        var style = lang.hitch( this, 'getStyle' );
+
         context.strokeStyle = style( fRect.f, 'color' );
-        context.lineWidth = 2* Math.log( r.score + 1 );
+        context.lineWidth = style( fRect.f, 'lineWidth' );
         context.moveTo( r.drawFrom, 0 );
         var height = style( fRect.f, 'height' );
         context.bezierCurveTo( r.drawFrom, height, r.drawTo, height, r.drawTo, 0 );
         context.stroke();
     },
     getRadius: function( feature, block ) {
-        var e = feature.get('end');
-        var s = feature.get('start');
+        var e,s;
+        if(feature.get('subfeatures').length == 2) {
+            s = feature.get('subfeatures')[0].get('end');
+            e = feature.get('subfeatures')[1].get('start');
+        }
+        else {
+            s = feature.get('start');
+            e = feature.get('end');
+        }
         var drawTo = block.bpToX( e );
         var drawFrom = block.bpToX( s );
         return {
             r: ( drawFrom - drawTo ) / 2,
             drawTo: drawTo,
-            drawFrom: drawFrom,
-            score: feature.get('score'),
+            drawFrom: drawFrom
         };
-    },
-    get_hue_color: function( x ) {
-        var h = x;
-        var s = 50;
-        var l = 50;
-        return 'hsl(' + h + ',' + s + '%,' + l + '%)';
     },
     layoutFeature: function( viewArgs, layout, feature ) {
         var rect = this.inherited( arguments );

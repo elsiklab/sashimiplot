@@ -1,3 +1,8 @@
+# Version 0.1.1
+
+- Use internal boundaries of junctions.bed
+- Allow lineWidth to be configurable
+
 # Version 0.1.0
 
 - First release

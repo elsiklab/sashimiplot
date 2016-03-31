@@ -1,3 +1,7 @@
+# Version 0.1.2
+
+- Fix read depth filter
+
 # Version 0.1.1
 
 - Use internal boundaries of junctions.bed

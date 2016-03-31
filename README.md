@@ -45,3 +45,4 @@ Using a file like junctions.bed loaded with flatfile-to-json.pl
          "label" : "From_junctions_bed"
       }
 
+Note: since junctions.bed files include score and strand, their behavior will the same as calculating these attributes on the fly from the BAM file, and the "Use XS" will simply apply to the bed file strand

@@ -62,7 +62,7 @@ return declare( FeatureGlyph, {
     },
     getRadius: function( feature, block ) {
         var e,s;
-        if(feature.get('subfeatures').length == 2) {
+        if(feature.get('subfeatures')&&feature.get('subfeatures').length == 2) {
             s = feature.get('subfeatures')[0].get('end');
             e = feature.get('subfeatures')[1].get('start');
         }

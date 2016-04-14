@@ -1,5 +1,5 @@
 {
-  "name": "SashimiPlot",
+  "name": "sashimiplot",
   "homepage": "https://github.com/cmdcolin/sashimiplot",
   "authors": [
     "Colin <colin.diesh@gmail.com>"
@@ -20,6 +20,7 @@
     "tests"
   ],
   "devDependencies": {
-    "jasmine-core": "jasmine#^2.4.1"
+    "jasmine-core": "jasmine#^2.4.1",
+    "jbrowse": "git://github.com/GMOD/jbrowse.git#master"
   }
 }

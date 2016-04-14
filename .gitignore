@@ -1,1 +1,15 @@
 test/jasmine-core
+test/dojo
+test/FileSaver/
+test/dbind/
+test/dgrid/
+test/dijit/
+test/dojox/
+test/jDataView/
+test/jbrowse/
+test/json-schema/
+test/jszlib/
+test/lazyload/
+test/put-selector/
+test/util/
+test/xstyle/

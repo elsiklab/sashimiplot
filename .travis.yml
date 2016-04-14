@@ -1,0 +1,15 @@
+sudo: false
+addons:
+  apt:
+    packages:
+    - nginx
+before_install:
+  - npm install -g jshint bower
+install:
+  - bower install
+before_script:
+  - cat tests/travis.conf | envsubst > tests/travis-envsubst.conf
+  - nginx -c `pwd`/test/travis-envsubst.conf
+script:
+  - phantomjs test/run-jasmine.js http://localhost:9000/test/
+  - jshint js

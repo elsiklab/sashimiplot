@@ -11,17 +11,24 @@
   <script src="jasmine-core/lib/jasmine-core/boot.js"></script>
 
   <!-- include source files here... -->
-  <script type="text/javascript" src="../../../src/dojo/dojo.js" data-dojo-config="async: 1" ></script>
+  <script type="text/javascript" src="dojo/dojo.js" data-dojo-config="async: 1" ></script>
 
   <script type="text/javascript">
-    require( { baseUrl: '../../../src',
-               packages: [ 'dojo', 'dijit', 'dojox', 'jszlib',
-                            { name: 'lazyload',  main: 'lazyload' },
-                            'dgrid', 'xstyle', 'put-selector', 'FileSaver',
-                            { name: 'jDataView', location: 'jDataView/src', main: 'jdataview' },
-                            'JBrowse',
-                            {name: 'SashimiPlot', location: "../plugins/SashimiPlot/js"}
-                         ]
+    require( { baseUrl: '.',
+               packages: [
+                   'dojo',
+                   'dijit',
+                   'dojox',
+                   'jszlib',
+                   { name: 'lazyload', location: 'lazyload', main: 'lazyload' },
+                   'dgrid',
+                   'xstyle',
+                   'put-selector',
+                   'FileSaver',
+                   { name: 'jDataView', location: 'jDataView/src', main: 'jdataview' },
+                   { name: 'JBrowse', location: 'jbrowse/src/JBrowse' },
+                   { name: 'SashimiPlot', location: '../js' }
+               ]
               },
               ['dojo/ready','JBrowse/Browser','SashimiPlot/View/Track/Sashimi'],
               function( ready,Browser,Sashimi ) {

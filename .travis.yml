@@ -3,6 +3,10 @@ addons:
   apt:
     packages:
     - nginx
+cache:
+  apt: true
+  directories:
+  - $HOME/.cache/bower
 before_install:
   - npm install -g jshint bower
 install:

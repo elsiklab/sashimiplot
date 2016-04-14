@@ -1,14 +1,54 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <title>Jasmine Spec Runner</title>
-  <link rel="stylesheet" href="../app/components/jasmine/lib/jasmine-core/jasmine.css">
+
+  <link rel="stylesheet" href="jasmine-core/lib/jasmine-core/jasmine.css">
+  <script src="jasmine-core/lib/jasmine-core/jasmine.js"></script>
+  <script src="jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
+  <script src="jasmine-core/lib/jasmine-core/boot.js"></script>
+
+  <!-- include source files here... -->
+  <script type="text/javascript" src="../../../src/dojo/dojo.js" data-dojo-config="async: 1" ></script>
+
+  <script type="text/javascript">
+    require( { baseUrl: '../../../src',
+               packages: [ 'dojo', 'dijit', 'dojox', 'jszlib',
+                            { name: 'lazyload',  main: 'lazyload' },
+                            'dgrid', 'xstyle', 'put-selector', 'FileSaver',
+                            { name: 'jDataView', location: 'jDataView/src', main: 'jdataview' },
+                            'JBrowse',
+                            {name: 'SashimiPlot', location: "../plugins/SashimiPlot/js"}
+                         ]
+              },
+              ['dojo/ready','JBrowse/Browser','SashimiPlot/View/Track/Sashimi'],
+              function( ready,Browser,Sashimi ) {
+                  console.log(Sashimi);
+
+//      var jasmineEnv = jasmine.getEnv();
+//      jasmineEnv.updateInterval = 1000;
+//
+//      var htmlReporter = new jasmine.HtmlReporter();
+//
+//      jasmineEnv.addReporter(htmlReporter);
+//
+//      jasmineEnv.specFilter = function(spec) {
+//        return htmlReporter.specFilter(spec);
+//      };
+//      ready( function() {execJasmine();});
+//      function execJasmine() {
+//        jasmineEnv.execute();
+//      }
+    });
+  </script>
+  <script type="text/javascript" src="spec/Sashimi.spec.js"></script>
+
+
 </head>
 <body>
   <div id="sandbox" style="overflow:hidden; height:1px;"></div>
-  <script src="../app/components/jasmine/lib/jasmine-core/jasmine.js"></script>
-  <script src="../app/components/jasmine/lib/jasmine-core/jasmine-html.js"></script>
-  <script src="../app/components/requirejs/require.js" data-main="SpecRunner"></script>
+
 </body>
 </html>

@@ -18,5 +18,8 @@
     "src",
     "test",
     "tests"
-  ]
+  ],
+  "devDependencies": {
+    "jasmine-core": "jasmine#^2.4.1"
+  }
 }

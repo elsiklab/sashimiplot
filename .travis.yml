@@ -8,7 +8,7 @@ before_install:
 install:
   - bower install
 before_script:
-  - cat tests/travis.conf | envsubst > tests/travis-envsubst.conf
+  - cat test/travis.conf | envsubst > test/travis-envsubst.conf
   - nginx -c `pwd`/test/travis-envsubst.conf
 script:
   - phantomjs test/run-jasmine.js http://localhost:9000/test/

@@ -29,7 +29,7 @@ return declare( FeatureGlyph, {
                         }
                     },
                     height: function( feature ) {
-                        return 10*Math.log( feature.get('end') - feature.get('start') )
+                        return 10*Math.log( feature.get('end') - feature.get('start') );
                     },
                     lineWidth: function( feature ) {
                         return Math.log( feature.get('score') + 1 );
@@ -50,7 +50,7 @@ return declare( FeatureGlyph, {
         var style = lang.hitch( this, 'getStyle' );
 
         var r = this.getRadius( fRect.f, fRect.viewInfo.block );
-        if( r.r == 0 || fRect.f.get('score') < (this.config.readDepthFilter||0) ) return;
+        if( !r.r || fRect.f.get('score') < (this.config.readDepthFilter||0) ) return;
         context.beginPath();
 
         context.strokeStyle = style( fRect.f, 'color' );

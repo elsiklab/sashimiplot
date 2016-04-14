@@ -41,7 +41,7 @@ return declare( ActionBarDialog, {
             onClick: dojo.hitch(this, function() {
                 var height = parseInt(this.readDepthSpinner.getValue());
                 if (isNaN(height)) return;
-                this.setCallback && this.setCallback( height );
+                if (this.setCallback) this.setCallback( height );
                 this.hide();
             })
         }).placeAt(actionBar);
@@ -49,7 +49,7 @@ return declare( ActionBarDialog, {
         var cancel_button = new Button({
             label: "Cancel",
             onClick: dojo.hitch(this, function() {
-                this.cancelCallback && this.cancelCallback();
+                if(this.cancelCallback) this.cancelCallback();
                 this.hide();
             })
         }).placeAt(actionBar);

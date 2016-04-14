@@ -50,7 +50,7 @@ return declare( [ SeqFeatureStore, MismatchesMixin ], {
                         }
                         else skipmap[ hash ].count++;
                     }
-                })
+                });
             },
             function ( args ) {
                 // make fake features from the coverage
@@ -69,8 +69,7 @@ return declare( [ SeqFeatureStore, MismatchesMixin ], {
                 });
                 
                 finishCallback( args ); // optional arguments may change callback behaviour (e.g. add masking)
-            }
-            , errorCallback
+            }, errorCallback
         );
     },
 

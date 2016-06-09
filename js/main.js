@@ -13,6 +13,10 @@ return declare( JBrowsePlugin,
 
         // do anything you need to initialize your plugin here
         console.log( "SashimiPlot plugin starting" );
+        browser.registerTrackType({
+            label: 'SashimiPlot RNA-seq',
+            type: 'SashimiPlot/View/Track/Sashimi'
+        });
 
     }
 });

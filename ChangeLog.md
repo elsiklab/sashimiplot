@@ -1,3 +1,7 @@
+# Version 0.1.3
+
+- Register track type with JBrowse so that users can open track themselves
+
 # Version 0.1.2
 
 - Fix read depth filter

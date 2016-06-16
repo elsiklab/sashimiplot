@@ -23,40 +23,40 @@ var profile = {
     layers: {
         'SashimiPlot/main': {
             include: [
-                'SashimiPlot',
+                'SashimiPlot'
             ],
             exclude: [ 'JBrowse' ]
         }
     },
 
     staticHasFeatures: {
-        'dojo-trace-api':0,
-        'dojo-log-api':0,
-        'dojo-publish-privates':0,
-        'dojo-sync-loader':0,
-        'dojo-xhr-factory':0,
-        'dojo-test-sniff':0
+        'dojo-trace-api': 0,
+        'dojo-log-api': 0,
+        'dojo-publish-privates': 0,
+        'dojo-sync-loader': 0,
+        'dojo-xhr-factory': 0,
+        'dojo-test-sniff': 0
     },
 
     resourceTags: {
         // Files that contain test code.
-        test: function (filename, mid) {
+        test: function(filename, mid) {
             return false;
         },
 
         // Files that should be copied as-is without being modified by the build system.
-        copyOnly: function (filename, mid) {
+        copyOnly: function(filename, mid) {
             return copyOnly(mid);
         },
 
         // Files that are AMD modules.
-        amd: function (filename, mid) {
+        amd: function(filename, mid) {
             return !copyOnly(mid) && /.js$/.test(filename);
         },
 
         // Files that should not be copied when the “mini” compiler flag is set to true.
-        miniExclude: function (filename, mid) {
-            return ! ( /^SashimiPlot/.test(mid) );
+        miniExclude: function(filename, mid) {
+            return !(/^SashimiPlot/.test(mid));
         }
     }
 };

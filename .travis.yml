@@ -8,7 +8,7 @@ cache:
   directories:
   - $HOME/.cache/bower
 before_install:
-  - npm install -g jshint bower
+  - npm install -g eslint eslint eslint-plugin-react eslint-config-airbnb-es5 babel-eslint bower
 install:
   - bower install
 before_script:
@@ -16,4 +16,4 @@ before_script:
   - nginx -c `pwd`/test/travis-envsubst.conf
 script:
   - phantomjs test/run-jasmine.js http://localhost:9000/test/
-  - jshint js
+  - eslint js

@@ -1,19 +1,14 @@
 sudo: false
-addons:
-  apt:
-    packages:
-    - nginx
 cache:
-  apt: true
   directories:
   - $HOME/.cache/bower
 before_install:
   - npm install -g eslint eslint eslint-plugin-react eslint-config-airbnb-es5 babel-eslint bower
+  - pip install --user RangeHTTPServer
 install:
   - bower install
 before_script:
-  - cat test/travis.conf | envsubst > test/travis-envsubst.conf
-  - nginx -c `pwd`/test/travis-envsubst.conf
+  - python -m RangeHTTPServer &
 script:
-  - phantomjs test/run-jasmine.js http://localhost:9000/test/
+  - phantomjs test/run-jasmine.js http://localhost:8000/test/
   - eslint js

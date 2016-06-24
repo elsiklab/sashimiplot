@@ -3,8 +3,8 @@ define([
     'JBrowse/Plugin'
 ],
 function(
-   declare,
-   JBrowsePlugin
+    declare,
+    JBrowsePlugin
 ) {
     return declare(JBrowsePlugin, {
         constructor: function(args) {

@@ -3,12 +3,11 @@ cache:
   directories:
   - $HOME/.cache/bower
 before_install:
-  - npm install -g eslint eslint eslint-plugin-react eslint-config-airbnb-es5 babel-eslint bower
   - pip install --user RangeHTTPServer
+  - npm install -g bower
 install:
   - bower install
 before_script:
   - python -m RangeHTTPServer &
 script:
   - phantomjs test/run-jasmine.js http://localhost:8000/test/
-  - eslint js

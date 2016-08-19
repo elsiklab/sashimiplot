@@ -1,0 +1,24 @@
+{
+  "name": "sashimiplot",
+  "version": "0.1.3",
+  "description": "A JBrowse plugin for viewing intron junctions",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmdcolin/sashimiplot.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cmdcolin/sashimiplot/issues"
+  },
+  "homepage": "https://github.com/cmdcolin/sashimiplot#readme"
+}

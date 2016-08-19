@@ -36,7 +36,7 @@ Calculating straight from BAM file
           "useXS": true
       }
 
-Using a file like junctions.bed loaded with flatfile-to-json.pl
+Using a junctions.bed file loaded with flatfile-to-json.pl
 
 
       {
@@ -46,4 +46,14 @@ Using a file like junctions.bed loaded with flatfile-to-json.pl
          "label" : "From_junctions_bed"
       }
 
-Note: since junctions.bed files include score and strand, their behavior will the same as calculating these attributes on the fly from the BAM file, and the "Use XS" will simply apply to the bed file strand
+Using a junctions.bed file with BEDTabix
+
+      {
+         "storeClass" : "JBrowse/Store/SeqFeature/BEDTabix",
+         "urlTemplate" : "junctions.bed.gz",
+         "type" : "SashimiPlot/View/Track/Sashimi",
+         "label" : "From_junctions_bedtabix"
+      }
+
+
+Note: junctions.bed files include score and strand, their behavior will the same if you were calculating this from the BAM file. The "Use XS" will simply apply to the bed file strand instead of the BAM file XS tag

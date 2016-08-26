@@ -25,7 +25,10 @@ Other options on the BAM store tracks can apply, such as chunkSizeLimit
 
 ## Example track config
 
-Calculating straight from BAM file
+The test/data directory contains an example config. There are several different setups
+
+
+Calculate junctions straight from a BAM file with a config like this
 
       {
           "label": "Nurse_junctions",
@@ -56,4 +59,4 @@ Using a junctions.bed file with BEDTabix
       }
 
 
-Note: junctions.bed files include score and strand, their behavior will the same if you were calculating this from the BAM file. The "Use XS" will simply apply to the bed file strand instead of the BAM file XS tag
+Note: junctions.bed files include score and strand, so their behavior will be the same as if you were calculating this from the BAM file. The "Use XS" will simply apply to the bed file strand instead of the BAM file XS tag

@@ -1,0 +1,43 @@
+{
+   "plugins" : [
+      "SashimiPlot"
+   ],
+   "tracks" : [
+      {
+         "style" : {
+            "className" : "feature"
+         },
+         "key" : "junctions",
+         "storeClass" : "JBrowse/Store/SeqFeature/NCList",
+         "trackType" : "SashimiPlot/View/Track/Sashimi",
+         "urlTemplate" : "tracks/junctions/{refseq}/trackData.json",
+         "compress" : 0,
+         "type" : "SashimiPlot/View/Track/Sashimi",
+         "label" : "junctions"
+      },
+      {
+         "storeClass" : "JBrowse/Store/SeqFeature/BAM",
+         "urlTemplate" : "accepted_hits.bam",
+         "label" : "accepted_hits sashimi",
+         "type" : "SashimiPlot/View/Track/Sashimi"
+      },
+      {
+         "storeClass" : "JBrowse/Store/SeqFeature/BAM",
+         "urlTemplate" : "accepted_hits.bam",
+         "label" : "accepted_hits bam",
+         "type" : "Alignments2"
+      },
+      {
+         "style" : {
+            "className" : "feature"
+         },
+         "key" : "cufflinks",
+         "storeClass" : "JBrowse/Store/SeqFeature/NCList",
+         "trackType" : null,
+         "urlTemplate" : "tracks/cufflinks/{refseq}/trackData.json",
+         "compress" : 0,
+         "type" : "FeatureTrack",
+         "label" : "cufflinks"
+      }
+   ]
+}

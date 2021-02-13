@@ -39,7 +39,7 @@ Calculate junctions straight from a BAM file with a config like this
           "useXS": true
       }
 
-Using a junctions.bed file loaded with flatfile-to-json.pl
+Using a junctions.bed file loaded with flatfile-to-json.pl, example command `bin/flatfile-to-json.pl --bed junctions.bed --trackType SashimiPlot/View/Track/Sashimi --trackLabel sashimi_junctions`
 
 
       {

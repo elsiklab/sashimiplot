@@ -11,7 +11,7 @@ A JBrowse implementation of the sashimi plot style tool. Features a storeclass t
 ## Track options
 
 
-* style->color - color (RGB,HSL,hex) or callback function returning a color
+* style->color - a color string (RGB,HSL,hex) or callback function returning a color string. default is brown for positive strand, blue for negative strand genes, with varying color for amount covered.
 * style->height - integer height or callback function returning height of the bezier curves.
 * style->lineWidth - integer width or callback function returning width of the bezier curves.
 * useXS - a built-in option to change color according to the XS tag (which indicates strand, inferred from canonical splice sites)

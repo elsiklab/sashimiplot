@@ -60,3 +60,8 @@ Using a junctions.bed file with BEDTabix
 
 
 Note: junctions.bed files include score and strand, so their behavior will be the same as if you were calculating this from the BAM file. The "Use XS" will simply apply to the bed file strand instead of the BAM file XS tag
+
+
+## Important note
+
+Name the folder plugins/SashimiPlot and then run 'npm run build' to rebuild jbrowse with the plugin code for JBrowse 1 v1.13.0+, the folder name is case sensitive

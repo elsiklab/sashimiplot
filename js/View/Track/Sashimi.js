@@ -74,9 +74,12 @@ lang.clone(this.inherited(arguments)),
         _getLayout: function() {
             var layout = this.inherited(arguments);
             return declare.safeMixin(layout, {
-                addRect: function(id, left, right, height, data) {
+                // Arcs all start at the top, so the track only needs to be as
+                // tall as the tallest arc. `height` is the arc height the glyph
+                // asked for, in pixels; pTotalHeight is in pitch units.
+                addRect: function(id, left, right, height) {
                     this.pTotalHeight = Math.min(
-                        Math.max(10 * Math.log(data.get('end') - data.get('start')), this.pTotalHeight),
+                        Math.max(height / this.pitchY, this.pTotalHeight),
                         this.maxHeight
                     );
                     return 0;
